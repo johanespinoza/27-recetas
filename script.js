@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollTracking();
     initCTATracking();
     initScrollAnimations();
+    initPurchaseNotifications();
     
     // Track page view
     if (typeof fbq !== 'undefined') {
@@ -206,3 +207,114 @@ setInterval(() => {
         fbq('trackCustom', 'TimeOnPage2Minutes');
     }
 }, 10000); // Check every 10 seconds
+
+// Purchase Notification System
+function initPurchaseNotifications() {
+    const names = [
+        'María González',
+        'Carlos Ramírez',
+        'Laura Martínez',
+        'Jorge Silva',
+        'Ana Rodríguez',
+        'Diego Torres',
+        'Carmen López',
+        'Roberto Fernández',
+        'Patricia Sánchez',
+        'Miguel Ángel',
+        'Sofía Morales',
+        'Fernando Castro',
+        'Valentina Ruiz',
+        'Andrés Vargas',
+        'Gabriela Mendoza',
+        'Luis Herrera',
+        'Isabella Romero',
+        'Ricardo Jiménez',
+        'Camila Ortiz',
+        'Pablo Navarro'
+    ];
+    
+    const locations = [
+        'Ciudad de México',
+        'Bogotá, Colombia',
+        'Madrid, España',
+        'Buenos Aires, Argentina',
+        'Lima, Perú',
+        'Santiago, Chile',
+        'Caracas, Venezuela',
+        'Quito, Ecuador',
+        'Montevideo, Uruguay',
+        'San José, Costa Rica',
+        'Panamá, Panamá',
+        'La Paz, Bolivia',
+        'Asunción, Paraguay',
+        'San Salvador, El Salvador',
+        'Tegucigalpa, Honduras',
+        'Managua, Nicaragua',
+        'Guatemala, Guatemala',
+        'Santo Domingo, Rep. Dominicana',
+        'San Juan, Puerto Rico',
+        'Barcelona, España'
+    ];
+    
+    const timeAgo = [
+        'Hace 2 minutos',
+        'Hace 5 minutos',
+        'Hace 8 minutos',
+        'Hace 12 minutos',
+        'Hace 15 minutos',
+        'Hace 18 minutos',
+        'Hace 1 minuto',
+        'Hace 3 minutos',
+        'Hace 7 minutos',
+        'Hace 10 minutos'
+    ];
+    
+    function createNotification() {
+        const container = document.getElementById('notification-container');
+        if (!container) return;
+        
+        // Random data
+        const name = names[Math.floor(Math.random() * names.length)];
+        const location = locations[Math.floor(Math.random() * locations.length)];
+        const time = timeAgo[Math.floor(Math.random() * timeAgo.length)];
+        
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <div class="notification-icon">✓</div>
+            <div class="notification-content">
+                <div class="notification-name">${name}</div>
+                <div class="notification-message">Compró el ebook desde ${location}</div>
+                <div class="notification-time">${time}</div>
+            </div>
+            <button class="notification-close" onclick="this.parentElement.remove()">×</button>
+        `;
+        
+        // Add to container
+        container.appendChild(notification);
+        
+        // Remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+        
+        // Track notification view
+        if (typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'PurchaseNotificationShown');
+        }
+    }
+    
+    // Show first notification after 5 seconds
+    setTimeout(() => {
+        createNotification();
+    }, 5000);
+    
+    // Show notification every 20 seconds
+    setInterval(() => {
+        createNotification();
+    }, 20000);
+}
+

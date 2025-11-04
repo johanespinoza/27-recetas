@@ -44,6 +44,7 @@ Landing page moderna, persuasiva y totalmente responsiva diseñada para vender e
 ├── script.js               # JavaScript para interactividad
 ├── README.md               # Este archivo
 ├── IMAGENES-INFO.md        # Información sobre las imágenes
+├── NOTIFICACIONES-INFO.md  # Documentación del sistema de notificaciones
 └── Imagenes/               # Carpeta con imágenes del producto
     ├── Principal.jpeg      # Imagen alternativa del ebook
     ├── principal 2.jpeg    # Imagen principal del hero ✅ USADA
@@ -157,6 +158,12 @@ npx serve
 4. **Scroll Animations**: Elementos aparecen al hacer scroll
 5. **Analytics Tracking**: Eventos de Facebook Pixel
 6. **Exit Intent**: Detecta cuando el usuario va a salir
+7. **🔔 Notificaciones de Compra**: Sistema automático de prueba social
+   - Primera notificación: 5 segundos después de cargar
+   - Nuevas notificaciones: Cada 20 segundos
+   - 20 nombres y 20 ubicaciones diferentes
+   - Auto-cierre después de 5 segundos
+   - Totalmente responsivo
 
 ## 🔧 Personalización
 
